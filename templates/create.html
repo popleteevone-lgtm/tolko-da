@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block title %}Собираем открытку — Только Да{% endblock %}
+{% block content %}
+<h1 class="rise" style="text-align:center;font-size:26px;--i:0">Собираем открытку</h1>
+<div class="stepper rise" id="stepper" style="--i:1"><div class="track"><div class="fill"></div></div><div class="steps"></div></div>
+
+<div class="create-grid">
+  <div class="rise" style="--i:2">
+    <div class="eyebrow" id="stepLabel">Шаг 1 из 4</div>
+    <h2 id="stepTitle">Повод и первые два экрана</h2>
+
+    <div class="steps-wrap">
+    <!-- ШАГ 1 -->
+    <div data-step="1">
+      <div class="panel">
+        <h3>Повод</h3>
+        <div class="tiles" id="occasions"></div>
+        <h3>Тема</h3>
+        <div class="tiles" id="themes"></div>
+      </div>
+      <div class="panel">
+        <h3>Экран 1 · Вопрос</h3>
+        <div class="field"><label>Стикер</label><div class="stickers" data-stickers="0"></div></div>
+        <div class="field"><label>Заголовок <span data-count="0.title">0/120</span></label><input class="input" data-bind="0.title" maxlength="120"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="field"><label>Кнопка «Да»</label><input class="input" data-bind="0.yes" maxlength="20"></div>
+          <div class="field"><label>Кнопка «Нет»</label><input class="input" data-bind="0.no" maxlength="20" title="Эта кнопка убегает от пальца"></div>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Экран 2 · После «да»</h3>
+        <div class="field"><label>Стикер</label><div class="stickers" data-stickers="1"></div></div>
+        <div class="field"><label>Заголовок</label><input class="input" data-bind="1.title" maxlength="120"></div>
+        <div class="field"><label>Подзаголовок</label><input class="input" data-bind="1.subtitle" maxlength="120"></div>
+        <div class="field"><label>Кнопка</label><input class="input" data-bind="1.button" maxlength="20"></div>
+      </div>
+    </div>
+
+    <!-- ШАГ 2 -->
+    <div data-step="2" hidden>
+      <div class="panel">
+        <h3>Экран 3 · Дата и время</h3>
+        <div class="field"><label>Стикер</label><div class="stickers" data-stickers="2"></div></div>
+        <div class="field"><label>Заголовок</label><input class="input" data-bind="2.title" maxlength="120"></div>
+        <div class="field"><label>Кнопка</label><input class="input" data-bind="2.button" maxlength="24"></div>
+        <p class="small muted">Она выберет день не раньше сегодняшнего и время с шагом пять минут. Кнопка оживает, когда всё заполнено.</p>
+      </div>
+    </div>
+
+    <!-- ШАГ 3 -->
+    <div data-step="3" hidden>
+      <div class="panel">
+        <h3>Экран 4 · Планы на вечер</h3>
+        <div class="field"><label>Стикер</label><div class="stickers" data-stickers="3"></div></div>
+        <div class="field"><label>Заголовок</label><input class="input" data-bind="3.title" maxlength="120"></div>
+        <div class="field"><label>Подзаголовок</label><input class="input" data-bind="3.subtitle" maxlength="120"></div>
+        <h3 style="margin-top:8px">Варианты <span class="muted small" id="optCount"></span></h3>
+        <div id="options"></div>
+        <p class="small muted">Еда, кино, прогулка, что угодно. Пустые строки она не увидит.</p>
+      </div>
+    </div>
+
+    <!-- ШАГ 4 -->
+    <div data-step="4" hidden>
+      <div class="panel">
+        <h3>Экран 5 · Договорились</h3>
+        <div class="field"><label>Стикер</label><div class="stickers" data-stickers="4"></div></div>
+        <div class="field"><label>Заголовок</label><input class="input" data-bind="4.title" maxlength="60"></div>
+        <div class="field"><label>Текст <span>{date} {time} {choice} подставятся сами</span></label><textarea class="input" data-bind="4.description" maxlength="200"></textarea></div>
+      </div>
+      <div class="panel">
+        <h3>Куда придёт её ответ</h3>
+        <div class="chips" id="chosenChannels"><span class="muted small">Спросим перед созданием ссылки.</span></div>
+        <div style="margin-top:12px"><button class="link-btn" id="openChannels">Выбрать сейчас</button></div>
+      </div>
+    </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn ghost" id="back">← Назад</button>
+      <button class="btn" id="next">Дальше →</button>
+    </div>
+  </div>
+
+  <div class="preview-col rise" style="--i:3">
+    <div class="eyebrow center">так увидит она</div>
+    <div class="preview-tabs" id="previewTabs"></div>
+    <div class="phone"><div class="notch"></div><div class="screen" id="preview"></div></div>
+    <p class="small muted" style="text-align:center;margin-top:10px">Всё живое: нажимай и пробуй поймать «Нет»</p>
+    <p class="small" style="text-align:center;margin-top:4px"><button class="link-btn" id="resetDraft" style="font-size:12.5px;color:var(--muted)">Начать заново</button></p>
+  </div>
+</div>
+
+<!-- ПОПАП ВЫБОРА КАНАЛА -->
+<div class="modal-bg" id="chModal" role="dialog" aria-modal="true" aria-labelledby="chTitle">
+  <div class="modal">
+    <div class="eyebrow">последний вопрос</div>
+    <h2 id="chTitle">Куда прислать её ответ?</h2>
+    <p class="small muted">Все варианты бесплатные, можно выбрать несколько. Страница со статусом будет у тебя в любом случае.</p>
+    <div class="ch-list" id="chList"></div>
+    <div class="modal-actions">
+      <button class="link-btn" id="chSkip">Пропустить</button>
+      <button class="btn" id="chDone">Продолжить</button>
+    </div>
+  </div>
+</div>
+<style>.opt-row{display:grid;grid-template-columns:64px 1fr 36px;gap:8px;margin-bottom:8px;align-items:center;animation:rise .4s var(--ease) both;animation-delay:calc(var(--i,0)*40ms)}</style>
+{% endblock %}
+{% block scripts %}
+<script>window.CHANNELS = {{ channels | tojson }};</script>
+<script src="/static/js/card.js?v={{ v }}"></script>
+<script src="/static/js/presets.js?v={{ v }}"></script>
+<script src="/static/js/push.js?v={{ v }}"></script>
+<script src="/static/js/create.js?v={{ v }}"></script>
+{% endblock %}

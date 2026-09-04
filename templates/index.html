@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Только Да — открытка-приглашение на свидание{% endblock %}
+{% block topbarclass %}sticky{% endblock %}
+{% block topright %}<a class="btn sm topcta" id="topcta" href="/create">Собрать открытку</a>{% endblock %}
+{% block content %}
+<section class="hero" id="hero">
+  <div>
+    <div class="stat rise" style="--i:0"><span class="av"><i>🧸</i><i>🌹</i><i>🛸</i></span>уже отправлено: <b id="stat">0</b></div>
+    <div class="eyebrow rise" style="--i:1">открытка-приглашение по ссылке</div>
+    <h1 class="rise" style="--i:2">Позови на свидание так, чтобы отказаться было <em>невозможно</em></h1>
+    <p class="lede rise" style="--i:3">Собери открытку за пару минут и отправь ссылку. Она откроет её в телефоне, попробует нажать «Нет» и не сможет, выберет день и план на вечер. А ты узнаешь об этом первым.</p>
+    <div class="hero-cta rise" style="--i:4">
+      <a class="btn glow" href="/create">Собрать открытку</a>
+      <a class="link-btn" href="#how">Как это работает</a>
+    </div>
+    <div class="trust rise" style="--i:5"><span>без регистрации</span><span>две минуты</span><span>ответ туда, куда скажешь</span></div>
+  </div>
+  <div class="rise" style="--i:2">
+    <div class="hero-phone">
+      <div class="float-chip a" aria-hidden="true">👀<small>Открыла<b>19:41</b></small></div>
+      <div class="float-chip b" aria-hidden="true">❤️<small>Сказала «да»<b>19:42</b></small></div>
+      <div class="float-chip c" aria-hidden="true">📅<small>20 августа, 20:00<b>прогулка</b></small></div>
+      <div class="phone tilt"><div class="notch"></div><div class="screen" id="demo"></div></div>
+    </div>
+    <p class="small muted" style="text-align:center;margin-top:12px">Так это увидит она. Попробуй нажать «Нет»</p>
+  </div>
+</section>
+
+<section class="block reveal" id="how">
+  <div class="eyebrow center">как это работает</div>
+  <h2 style="text-align:center">Три шага до её «да»</h2>
+  <div class="steps3">
+    <div class="panel lift"><div class="n"><i>🎨</i>СОБЕРИ</div><h3>Открытку под свой повод</h3><p class="small muted">Первое свидание, годовщина или «прости меня». Свои тексты, стикер или фото. Результат виден сразу, в живом превью.</p></div>
+    <div class="panel lift"><div class="n"><i>📬</i>ОТПРАВЬ</div><h3>Ссылку в любой чат</h3><p class="small muted">Перед отправкой скажи, куда прислать ответ. Все варианты бесплатные.</p>
+      <div class="channels-row"><span>✉️ Почта</span><span>🔔 Пуш</span><span>💙 VK</span><span>✈️ Telegram</span><span>🟣 MAX</span></div></div>
+    <div class="panel lift"><div class="n"><i>👀</i>СМОТРИ</div><h3>Как она проходит экраны</h3><p class="small muted">Открыла, сказала «да», выбрала день и план. Каждый шаг прилетает тебе, а итог можно сразу добавить в календарь.</p></div>
+  </div>
+</section>
+
+<section class="block reveal">
+  <div class="eyebrow center">после отправки</div>
+  <h2 style="text-align:center">Что было дальше</h2>
+  <div class="bubbles">
+    <div class="bubble"><div class="who"><i>М</i>Максим</div><p>Она пыталась нажать «Нет» раз пять, потом написала «ну ты и хитрый». Идём в субботу.</p><div class="meta">19:42 ✓✓</div></div>
+    <div class="bubble"><div class="who"><i>А</i>Алина</div><p>Открыла ссылку в чате и минуту не понимала, что происходит. Потом мишка, потом кнопка убежала. Растаяла.</p><div class="meta">20:15 ✓✓</div></div>
+    <div class="bubble"><div class="who"><i>Д</i>Дима</div><p>Самое приятное было смотреть, как на странице появляется «открыла», «сказала да», «выбрала кино».</p><div class="meta">21:08 ✓✓</div></div>
+    <div class="bubble"><div class="who"><i>К</i>Карина</div><p>Отправила ему на годовщину. До сих пор хранит скриншот финального экрана.</p><div class="meta">18:36 ✓✓</div></div>
+  </div>
+</section>
+
+<section class="block reveal" id="faq">
+  <div class="eyebrow center">перед отправкой спрашивают</div>
+  <h2 style="text-align:center">Коротко о главном</h2>
+  <div class="faq">
+    <div class="faq-item"><button class="faq-q">Нужно регистрироваться?<span class="x">+</span></button><div class="faq-a"><div>Нет. Открытка создаётся без аккаунта. Все её ответы живут на твоей секретной странице, ссылку на неё стоит сохранить.</div></div></div>
+    <div class="faq-item"><button class="faq-q">Куда придёт её ответ?<span class="x">+</span></button><div class="faq-a"><div>Куда скажешь: на почту, пушем на телефон, в VK, Telegram или MAX. Все варианты бесплатные. А на финальном экране у неё есть кнопка «Отправить ему ответ», она работает в любом мессенджере.</div></div></div>
+    <div class="faq-item"><button class="faq-q">Сколько живёт ссылка?<span class="x">+</span></button><div class="faq-a"><div>30 дней, открывать можно сколько угодно. Если она уже ответила, при следующем открытии увидит итог, а не начало.</div></div></div>
+    <div class="faq-item"><button class="faq-q">А если она нажмёт «Нет»?<span class="x">+</span></button><div class="faq-a"><div>Не нажмёт. Кнопка убегает от пальца, с каждой попыткой уменьшается и после седьмой исчезает. Ты узнаешь, сколько раз она пыталась.</div></div></div>
+    <div class="faq-item"><button class="faq-q">Можно свои фото и тексты?<span class="x">+</span></button><div class="faq-a"><div>Да. Каждый экран редактируется: заголовки, кнопки, стикер или фотография до 7 МБ, список планов на вечер.</div></div></div>
+  </div>
+</section>
+
+<section class="cta reveal" id="cta">
+  <h2>Ну что, зовёшь?</h2>
+  <p>Открытка будет готова через пару минут. А дальше самое интересное: смотреть, как она проходит экран за экраном.</p>
+  <a class="btn" href="/create">Собрать открытку</a>
+</section>
+
+<footer><span>© Только Да</span><span><a href="#how">Как это работает</a> · <a href="#faq">Вопросы</a></span></footer>
+{% endblock %}
+{% block scripts %}
+<script src="/static/js/card.js?v={{ v }}"></script>
+<script src="/static/js/presets.js?v={{ v }}"></script>
+<script>
+  TolkoCard.mount(document.getElementById("demo"), { card: TolkoPresets.build("first", "rose"), preview: true, autoplay: true });
+  fetch("/api/stats").then((r) => r.json()).then((s) => TolkoFX.countUp(document.getElementById("stat"), s.sent, 1400)).catch(() => {});
+  TolkoFX.ambient(document.getElementById("cta"), { count: 10 });
+  document.querySelectorAll(".faq-q").forEach((q) => q.addEventListener("click", () => {
+    const it = q.parentElement, open = it.classList.contains("open");
+    document.querySelectorAll(".faq-item.open").forEach((o) => o.classList.remove("open"));
+    if (!open) it.classList.add("open");
+  }));
+  // кнопка в шапке появляется только когда главная кнопка ушла за экран
+  const heroBtn = document.querySelector(".hero .btn"), topBtn = document.getElementById("topcta");
+  if ("IntersectionObserver" in window) new IntersectionObserver((es) => topBtn.classList.toggle("show", !es[0].isIntersecting), { threshold: 0 }).observe(heroBtn);
+  else topBtn.classList.add("show");
+</script>
+{% endblock %}

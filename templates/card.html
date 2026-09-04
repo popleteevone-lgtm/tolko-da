@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{ og_title }}</title>
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Тебе приглашение 💌">
+<meta property="og:description" content="{{ og_title }}">
+<meta property="og:url" content="{{ og_url }}">
+<meta property="og:type" content="website">
+<meta property="og:image" content="{{ og_url }}/og.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#E0326E">
+<link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+<link rel="preload" href="/static/fonts/Unbounded-700-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/static/fonts/Manrope-600-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/static/css/fonts.css?v={{ v }}">
+<link rel="stylesheet" href="/static/css/card.css?v={{ v }}">
+<style>
+  html,body{margin:0;height:100%;background:#FBF0F3;overscroll-behavior:none}
+  body.theme-rose{background:radial-gradient(120% 80% at 10% 0%,#FFE1EA,#FBF0F3 50%,#FFF0E6)}
+  body.theme-lavender{background:radial-gradient(120% 80% at 10% 0%,#EDE4FF,#F7F2FF 50%,#FFF0F6)}
+  body.theme-peach{background:radial-gradient(120% 80% at 10% 0%,#FFE3D1,#FFF5EE 50%,#FFE9F0)}
+  body.theme-night{background:radial-gradient(120% 80% at 10% 0%,#1F1738,#120E22 60%,#0D0A18)}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#2B1E25;color:#fff;padding:10px 16px;border-radius:999px;font:14px Manrope,sans-serif;opacity:0;transition:.25s;pointer-events:none;z-index:99}
+  .toast.show{opacity:1}
+  .pv{position:fixed;top:max(10px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:5;font:600 11px "IBM Plex Mono",monospace;letter-spacing:.08em;background:rgba(0,0,0,.55);color:#fff;padding:5px 12px;border-radius:999px;backdrop-filter:blur(6px)}
+</style>
+</head>
+<body class="theme-{{ inv.card.theme or 'rose' }}">
+{% if preview %}<div class="pv" title="Ответы не сохраняются">ПРЕДПРОСМОТР</div>{% endif %}
+<div id="card" class="tc-full"></div>
+<script src="/static/js/fx.js?v={{ v }}"></script>
+<script src="/static/js/card.js?v={{ v }}"></script>
+<script>
+  const inv = {{ inv | tojson }};
+  TolkoCard.mount(document.getElementById("card"), { card: inv.card, code: inv.code, answers: inv.answers, preview: {{ 'true' if preview else 'false' }}, expired: inv.expired });
+</script>
+</body>
+</html>

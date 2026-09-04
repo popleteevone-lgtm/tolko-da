@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{{ "Страницы нет" if notfound else "Открытка истекла" }} — Только Да{% endblock %}
+{% block content %}
+<div class="panel rise" style="max-width:520px;margin:40px auto;text-align:center">
+  <div style="font-size:56px">{{ "🔍" if notfound else "🕰" }}</div>
+  <h2>{{ "Такой страницы нет" if notfound else "Открытка истекла" }}</h2>
+  <p class="muted">{{ "Проверь ссылку. Или собери свою открытку, это две минуты." if notfound else "Ссылка жила 30 дней. Попроси прислать новую или собери свою." }}</p>
+  <a class="btn" href="/create">Собрать открытку</a>
+</div>
+{% endblock %}

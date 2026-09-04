@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{% block title %}Только Да{% endblock %}</title>
+<meta name="theme-color" content="#E0326E">
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/static/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/static/icon.svg">
+<script>(function(){try{var t=localStorage.getItem("tolkoda.theme");if(t)document.documentElement.setAttribute("data-theme",t);}catch(e){}})();</script>
+<link rel="preload" href="/static/fonts/Unbounded-700-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/static/fonts/Manrope-400-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/static/css/fonts.css?v={{ v }}">
+<link rel="stylesheet" href="/static/css/app.css?v={{ v }}">
+<link rel="stylesheet" href="/static/css/card.css?v={{ v }}">
+<script src="/static/js/fx.js?v={{ v }}"></script>
+{% block head %}{% endblock %}
+</head>
+<body>
+<div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+{% block body %}
+<div class="wrap">
+  <div class="topbar rise {% block topbarclass %}{% endblock %}">
+    <a class="brand" href="/">💌 ТОЛЬКО ДА</a>
+    <div class="topbar-right">{% block topright %}{% endblock %}<button class="theme-btn" id="themeToggle" type="button" aria-label="Переключить тему" title="Тема">🌙</button></div>
+  </div>
+  {% block content %}{% endblock %}
+</div>
+{% endblock %}
+<div class="toast" id="toast"></div>
+<script>
+window.toast = (t) => { const el = document.getElementById("toast"); el.textContent = t; el.classList.add("show"); clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("show"), 2000); };
+(function () {
+  const root = document.documentElement, btn = document.getElementById("themeToggle"), meta = document.querySelector('meta[name="theme-color"]');
+  const current = () => root.getAttribute("data-theme") || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  const paint = () => { const d = current() === "dark"; btn.textContent = d ? "☀️" : "🌙"; btn.title = d ? "Светлая тема" : "Тёмная тема"; if (meta) meta.content = d ? "#171114" : "#E0326E"; };
+  btn.addEventListener("click", () => { const next = current() === "dark" ? "light" : "dark"; root.setAttribute("data-theme", next); try { localStorage.setItem("tolkoda.theme", next); } catch (e) {} paint(); });
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", paint);
+  paint();
+})();
+</script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
